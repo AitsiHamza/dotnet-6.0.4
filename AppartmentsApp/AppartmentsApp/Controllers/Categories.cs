@@ -19,4 +19,20 @@ public class Categories : Controller
         IEnumerable<Category> categories = await _categoryRepository.GetAll();
         return View(categories);
     }
+    public async Task<IActionResult> Delete(int id)
+    {
+        var category = await _categoryRepository.GetById(id);
+        if(category == null) return View("Error");
+        return View(category);
+    }
+    
+    [HttpPost, ActionName("Delete")]
+    public async Task<IActionResult> DeleteById(int id)
+    {
+        Category category = await _categoryRepository.GetById(id);
+        if(category == null) return View("Error");
+        Boolean b=_categoryRepository.Delete(category);
+        Console.WriteLine(b);
+        return RedirectToAction("CategoriesIndex");
+    }
 }

@@ -19,6 +19,11 @@ public class ApartmentRepositoryImpl:IApartmentRepository
         return await _context.Apartments.Include(i => i.Category).ToListAsync();
     }
 
+    public async Task<Apartment> GetById(int id)
+    {
+        return await _context.Apartments.FirstOrDefaultAsync(a => a.Id == id);
+    }
+
     public bool Add(Apartment apartment)
     {
         throw new NotImplementedException();
@@ -36,6 +41,7 @@ public class ApartmentRepositoryImpl:IApartmentRepository
 
     public bool Save()
     {
-        throw new NotImplementedException();
+        var saved = _context.SaveChanges();
+        return saved > 0 ? true : false;
     }
 }

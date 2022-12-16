@@ -35,19 +35,19 @@ public class Seed
                     {
                         address = "Mohammedia ...",
                         surface = "1355m2",
-                        CategoryId=1
+                        CategoryId=13
                     },
                     new Apartment()
                     {
                         address = "Casa ...",
                         surface = "5655m2",
-                        CategoryId=1
+                        CategoryId=13
                     },
                     new Apartment()
                     {
                         address = "Rabat ...",
                         surface = "885m2",
-                        CategoryId=2
+                        CategoryId=14
                     },
                 });
                 context.SaveChanges();

@@ -19,6 +19,11 @@ public class CategoryRepositoryImpl:ICategoryRepository
         return await _context.Categories.ToListAsync();
     }
 
+    public async Task<Category> GetById(int id)
+    {
+        return await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
+    }
+
     public bool Add(Category category)
     {
         throw new NotImplementedException();
@@ -31,11 +36,13 @@ public class CategoryRepositoryImpl:ICategoryRepository
 
     public bool Delete(Category category)
     {
-        throw new NotImplementedException();
+        _context.Categories.Remove(category);
+        return Save();
     }
     
     public bool Save()
     {
-        throw new NotImplementedException();
+        var saved = _context.SaveChanges();
+        return saved > 0 ? true : false;
     }
 }

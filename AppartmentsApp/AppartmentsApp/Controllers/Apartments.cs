@@ -19,4 +19,13 @@ public class Apartments : Controller
         IEnumerable<Apartment> apartments = await _apartmentRepository.GetAll();
         return View(apartments);
     }
+    
+    [HttpDelete, ActionName("Delete")]
+    public async Task<IActionResult> DeleteById(int id)
+    {
+        Apartment apartment = await _apartmentRepository.GetById(id);
+        if(apartment == null) return View("Error");
+        _apartmentRepository.Delete(apartment);
+        return RedirectToAction("ApartmentsIndex");
+    }
 }
